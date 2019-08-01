@@ -15,7 +15,7 @@ RTC_DS3231 rtc;
 //sets the different options for time events
 enum class TimeOfDay : uint8_t
 {
-  Night, Dawn, Day, Dusk, Evening, Storm
+  Night, Dawn, Day, Dusk, Evening, Storm, Nap
 };
 
 //initializes the time keeper variables
@@ -93,7 +93,17 @@ void scheduler(DateTime now)
         tod = TimeOfDay::Dawn;
         dawn();
       }
-    else if(now.hour() >= 7 && now.hour() < 18 && tod !=TimeOfDay::Day){
+    else if(now.hour() >= 7 && now.hour() < 12 && tod !=TimeOfDay::Day){
+        newTod = TimeOfDay::Day;
+        tod = TimeOfDay::Day;
+        Day();
+      }
+    else if(now.hour() >= 12 && now.hour() < 15 && tod !=TimeOfDay::Nap){
+        newTod = TimeOfDay::Nap;
+        tod = TimeOfDay::Nap;
+        dusk();
+      }      
+    else if(now.hour() >= 15 && now.hour() < 18 && tod !=TimeOfDay::Day){
         newTod = TimeOfDay::Day;
         tod = TimeOfDay::Day;
         Day();
@@ -108,7 +118,7 @@ void scheduler(DateTime now)
         tod = TimeOfDay::Evening;
         evening();
       }
-    else if(now.hour() >= 22 || now.hour() < 6 && tod !=TimeOfDay::Night){
+    else if(now.hour() >= 23 || now.hour() < 6 && tod !=TimeOfDay::Night){
         newTod = TimeOfDay::Night;
         tod = TimeOfDay::Night;
        night();
@@ -140,6 +150,7 @@ void updateDisplay(DateTime now)
   oled.set2X();
   if(tod == TimeOfDay::Night) oled.println("Night");
   else if(tod == TimeOfDay::Dawn) oled.println("Dawn");
+  else if(tod == TimeOfDay::Nap) oled.println("Nap");
   else if(tod == TimeOfDay::Day) oled.println("Day");
   else if(tod == TimeOfDay::Dusk) oled.println("Dusk");
   else if(tod == TimeOfDay::Evening) oled.println("Evening");
