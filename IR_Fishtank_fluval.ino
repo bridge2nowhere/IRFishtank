@@ -37,8 +37,13 @@ void setup()
   pinMode(TODBUTTON,INPUT_PULLUP);
   pinMode(OVERRIDEBUTTON,INPUT_PULLUP);
   
-  //updates the time and date to the time and date the sketch was compiled
-  rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  
+  if (rtc.lostPower()) {
+      rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  }
+  
+  //uncomment line below to force time update to the time and date the sketch was compiled
+  //rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 }
 
 void loop() {
