@@ -40,52 +40,52 @@ void setup()
 
 
 
-void looop()
+void loop()
 {
 //test code goes between the two bars
 /////////////////////////////////////////////////////
   //set ch2
-  irsend.sendNEC(irCh2,32);
+  irsend.sendNEC(0xFFE01F,32);
   delay(sendDelay);
   
   //test + and -
-  irsend.sendNEC(irPlus,32);
+  irsend.sendNEC(0xFF708F,32);
   delay(sendDelay);
-  irsend.sendNEC(irPlus,32);
+  irsend.sendNEC(0xFF708F,32);
   delay(sendDelay);
-  irsend.sendNEC(irPlus,32);
+  irsend.sendNEC(0xFF708F,32);
   delay(sendDelay);
-  irsend.sendNEC(irPlus,32);
+  irsend.sendNEC(0xFF708F,32);
   delay(sendDelay);
-  irsend.sendNEC(irPlus,32);
+  irsend.sendNEC(0xFF708F,32);
   delay(sendDelay);
-  irsend.sendNEC(irMinus,32);
+  irsend.sendNEC(0xFF906,32);
   delay(sendDelay);
-  irsend.sendNEC(irMinus,32);
+  irsend.sendNEC(0xFF906,32);
   delay(sendDelay);
-  irsend.sendNEC(irMinus,32);
+  irsend.sendNEC(0xFF906,32);
   delay(sendDelay);
-  irsend.sendNEC(irMinus,32);
+  irsend.sendNEC(0xFF906,32);
   delay(sendDelay);
-  irsend.sendNEC(irMinus,32);
+  irsend.sendNEC(0xFF906,32);
   delay(sendDelay);
 
 ////////////////////////////////////////////////////
 
 
   oled.clear();
-  oled.println("Done")
-  oled.println("ch1 @ ");
-  oled.println(chan1);
-  
-  oled.print(" ch2 @ ");
-  oled.println(chan2);
-  
-  oled.print("ch3 @ ");
-  oled.println(chan3);
-  
-  oled.print("ch4 @ ");
-  oled.println(chan4);
+  oled.println("Done");
+//  oled.println("ch1 @ ");
+//  oled.println(chan1);
+//  
+//  oled.print(" ch2 @ ");
+//  oled.println(chan2);
+//  
+//  oled.print("ch3 @ ");
+//  oled.println(chan3);
+//  
+//  oled.print("ch4 @ ");
+//  oled.println(chan4);
   
 }  
   
