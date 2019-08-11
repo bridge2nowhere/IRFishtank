@@ -7,6 +7,28 @@
 #define TODBUTTON 4
 #define OVERRIDEBUTTON 5
 
+const unsigned long irCh1 =  0xFFC03FUL;
+const unsigned long irCh1P = 0xFF30CFUL;
+const unsigned long irCh1M = 0xFF906FUL;
+
+const unsigned long irCh2 =  0xFFE01FUL;
+const unsigned long irCh2P = 0xFF50AFUL;
+const unsigned long irCh2M = 0xFFA857UL;
+
+
+const unsigned long irCh3 =  0xFF20DFUL;
+const unsigned long irCh3P = 0xFFB04FUL;
+const unsigned long irCh3M = 0xFF6897UL;
+
+
+const unsigned long irCh4 =  0xFF609FUL;
+const unsigned long irCh4P = 0xFF708FUL;
+const unsigned long irCh4M = 0xFF28D7UL;
+
+int sendDelay = 2000;
+
+
+
 
 SSD1306AsciiWire oled;
 IRsend irsend;
@@ -246,40 +268,49 @@ TimeOfDay nextEnum()
 void q1()
 {
   //chan1
-  irsend.sendNEC(0xFFC03F,32);
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
   if(chan1 < 6)
   {
     while (chan1 < 6) {
       chan1 ++;
-      irsend.sendNEC(0xFF708F,32);
+      irsend.sendNEC(irCh1P,32);
+      delay(sendDelay);
     }
   }
   else if(chan1 > 6) {
     while (chan1 > 6) {
       chan1 --;
-      irsend.sendNEC(0xFF708F,32);
+      irsend.sendNEC(irCh1M,32);
+      delay(sendDelay);
     }    
   }
   
   //chan2
-  irsend.sendNEC(0xFFE01F,32);
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
   while (chan2 > 0) {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
 
   //chan3
-  irsend.sendNEC(0xFF20DF,32);
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 > 0) {
     chan3 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh3M,32);
+    delay(sendDelay);
   }
 
   //chan4
-  irsend.sendNEC(0xFF609F,32);
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 > 0) {
     chan4 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh4M,32);
+    delay(sendDelay);
   }
 
 }
@@ -287,34 +318,39 @@ void q1()
 void q2()
 {
   //chan1
-  irsend.sendNEC(0xFFC03F,32);
-  if(chan1 < 11)
-  {
-    while (chan1 < 11) {
-      chan1 ++;
-      irsend.sendNEC(0xFF708F,32);
-    }
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
+  while (chan1 < 11) {
+    chan1 ++;
+    irsend.sendNEC(irCh1P,32);
+    delay(sendDelay);
   }
   
   //chan2
-  irsend.sendNEC(0xFFE01F,32);
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
   while (chan2 > 0) {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
 
   //chan3
-  irsend.sendNEC(0xFF20DF,32);
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 > 0) {
     chan3 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh3M,32);
+    delay(sendDelay);
   }
 
   //chan4
-  irsend.sendNEC(0xFF609F,32);
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 > 0) {
     chan4 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh4M,32);
+    delay(sendDelay);
   }
 
 }
@@ -322,254 +358,384 @@ void q2()
 
 void q3()
 {
-  irsend.sendNEC(0xFFC03F,32);
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
   while (chan1 < 11) {
     chan1 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh1P,32);
+    delay(sendDelay);
   }
   
-  irsend.sendNEC(0xFFE01F,32);
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
   while (chan2 > 0) {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF20DF,32);
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 < 11) {
     chan3 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh3P,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 > 0) {
     chan4 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh4M,32);
+    delay(sendDelay);
   }
 }
 
 void q4()
 {
-  irsend.sendNEC(0xFFC03F,32);
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
   while (chan1 < 11) {
     chan1 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh1P,32);
+    delay(sendDelay);
   }
   
-  irsend.sendNEC(0xFFE01F,32);
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
   while (chan2 > 0) {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF20DF,32);
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 < 11) {
     chan3 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh3P,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 < 11) {
     chan4 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh4P,32);
+    delay(sendDelay);
   }
+  
 }
 
 void q5()
 {
-  irsend.sendNEC(0xFFC03F,32);
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
   while (chan1 < 11) {
     chan1 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh1P,32);
+    delay(sendDelay);
   }
   
-  irsend.sendNEC(0xFFE01F,32);
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
   if(chan2 < 5)
   {
-    while (chan2 < 5) {
+    while(chan2 < 5)
+    {
       chan2 ++;
-      irsend.sendNEC(0xFF708F,32);
+      irsend.sendNEC(irCh2P,32);
+      delay(sendDelay);
     }
   }
   else if(chan2 > 5)
   {
     while (chan2 > 5) {
       chan2 --;
-      irsend.sendNEC(0xFF906F,32);
+      irsend.sendNEC(irCh2M,32);
+      delay(sendDelay);
     }
   }
 
-  irsend.sendNEC(0xFF20DF,32);
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 < 11) {
     chan3 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh3P,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 < 11) {
     chan4 ++;
-    irsend.sendNEC(0xFF708F,32);
-  }
+    irsend.sendNEC(irCh4P,32);
+    delay(sendDelay);
+  }  
 }
 
 void q6()
 {
-  irsend.sendNEC(0xFFC03F,32);
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
   while (chan1 < 11) {
     chan1 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh1P,32);
+    delay(sendDelay);
   }
   
-  irsend.sendNEC(0xFFE01F,32);
-  while (chan2 < 11) {
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
+  while(chan2 < 11)
+  {
     chan2 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh2P,32);
+    delay(sendDelay);
   }
-
-  irsend.sendNEC(0xFF20DF,32);
+  
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 < 11) {
     chan3 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh3P,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 < 11) {
     chan4 ++;
-    irsend.sendNEC(0xFF708F,32);
-  }
+    irsend.sendNEC(irCh4P,32);
+    delay(sendDelay);
+  }  
 }
 
 void q7()
 {
-  irsend.sendNEC(0xFFC03F,32);
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
   while (chan1 < 11) {
     chan1 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh1P,32);
+    delay(sendDelay);
   }
   
-  irsend.sendNEC(0xFFE01F,32);
-  while (chan2 > 0) {
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
+  while (chan2 > 0) 
+  {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
-
-  irsend.sendNEC(0xFF20DF,32);
+  
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 < 11) {
     chan3 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh3P,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 < 11) {
     chan4 ++;
-    irsend.sendNEC(0xFF708F,32);
-  }
+    irsend.sendNEC(irCh4P,32);
+    delay(sendDelay);
+  }  
+  
 }
 
 void q8()
 {
-  irsend.sendNEC(0xFFC03F,32);
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
   while (chan1 < 11) {
     chan1 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh1P,32);
+    delay(sendDelay);
   }
   
-  irsend.sendNEC(0xFFE01F,32);
-  while (chan2 > 0) {
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
+  while (chan2 > 0) 
+  {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
-
-  irsend.sendNEC(0xFF20DF,32);
+  
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 < 11) {
     chan3 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh3P,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 > 0) {
     chan4 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh4M,32);
+    delay(sendDelay);
   }
+
 }
 
 void q9()
 {
-  irsend.sendNEC(0xFFC03F,32);
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
   while (chan1 < 11) {
     chan1 ++;
-    irsend.sendNEC(0xFF708F,32);
+    irsend.sendNEC(irCh1P,32);
+    delay(sendDelay);
   }
   
-  irsend.sendNEC(0xFFE01F,32);
-  while (chan2 > 0) {
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
+  while (chan2 > 0) 
+  {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
-
-  irsend.sendNEC(0xFF20DF,32);
+  
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 > 0) {
     chan3 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh3M,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 > 0) {
     chan4 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh4M,32);
+    delay(sendDelay);
   }
 }
 
 void q10()
 {
-  irsend.sendNEC(0xFFC03F,32);
-  while (chan1 > 2) {
-    chan1 --;
-    irsend.sendNEC(0xFF906F,32);
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
+  if(chan1 < 2)
+  {
+    while (chan1 < 2) {
+      chan1 ++;
+      irsend.sendNEC(irCh1P,32);
+      delay(sendDelay);
+    }
+  }
+  else if(chan1 > 2) {
+    while (chan1 > 2) {
+      chan1 --;
+      irsend.sendNEC(irCh1M,32);
+      delay(sendDelay);
+    }    
   }
   
-  irsend.sendNEC(0xFFE01F,32);
-  while (chan2 > 0) {
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
+  while (chan2 > 0) 
+  {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
-
-  irsend.sendNEC(0xFF20DF,32);
+  
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 > 0) {
     chan3 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh3M,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 > 0) {
     chan4 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh4M,32);
+    delay(sendDelay);
   }
+
 }
 
 void q11()
 {
-  irsend.sendNEC(0xFFC03F,32);
-  while (chan1 > 0) {
+  //chan1
+  irsend.sendNEC(irCh1,32);
+  delay(sendDelay);
+  while (chan1 > 0) 
+  {
     chan1 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh1M,32);
+    delay(sendDelay);
   }
-  irsend.sendNEC(0xFF906F,32);
   
-  irsend.sendNEC(0xFFE01F,32);
-  while (chan2 > 0) {
+  //chan2
+  irsend.sendNEC(irCh2,32);
+  delay(sendDelay);
+  while (chan2 > 0) 
+  {
     chan2 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh2M,32);
+    delay(sendDelay);
   }
-
-  irsend.sendNEC(0xFF20DF,32);
+  
+  //chan3
+  irsend.sendNEC(irCh3,32);
+  delay(sendDelay);
   while (chan3 > 0) {
     chan3 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh3M,32);
+    delay(sendDelay);
   }
 
-  irsend.sendNEC(0xFF609F,32);
+  //chan4
+  irsend.sendNEC(irCh4,32);
+  delay(sendDelay);
   while (chan4 > 0) {
     chan4 --;
-    irsend.sendNEC(0xFF906F,32);
+    irsend.sendNEC(irCh4M,32);
+    delay(sendDelay);
   }
 }
