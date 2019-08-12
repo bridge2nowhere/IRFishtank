@@ -93,6 +93,8 @@ void loop() {
 
 void scheduler(DateTime now)
 {
+  oled.clear();
+  oled.println("Running");
   if (overrideTod)
    {
       if (newTod == TimeOfDay::Q1  && tod != newTod) {
